@@ -2,11 +2,17 @@
 
 ## run
 
-cd C:\HONG\JAVA2026\Sym3SHOP\HONG\springb3SHOPv2
+cd C:\HONG\JAVA2026\Sym3SHOP\HONG
+
+git clone https://github.com/hong1234/springboot3ShopApi.git
+
+cd springboot3ShopApi
 
 ./mvnw spring-boot:run
 
-## test using postman with basic authen : user=admin ; pw=admin
+## test using Postman client
+
+with basic authen : user=admin ; pw=admin
 
 http://localhost:8080/api/v1/products/search?title=JavaScript
 
