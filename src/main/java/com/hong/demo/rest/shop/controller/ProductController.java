@@ -14,9 +14,6 @@ import org.springframework.http.HttpStatus;
 // import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-// import com.hong.demo.rest.shop.domain.CategoryEntity;
-// import com.hong.demo.rest.shop.domain.ProductEntity;
-// import com.hong.demo.rest.shop.domain.Product;
 import com.hong.demo.rest.shop.domain.*;
 
 // import com.hong.demo.rest.shop.service.BookService;
@@ -34,28 +31,17 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Product addProduct(@RequestBody @Valid ProductDTO prod 
-        //, BindingResult result
-    ) throws ServiceException {
+    public Product addProduct(@RequestBody @Valid ProductDTO prod) throws ServiceException {
         return productService.addProduct(prod);
-
-        // if(result.hasErrors())
-        //     throw new ValidationException(createErrorString(result));
-        // return productService.addProduct(prod);
-        // URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedBook.getId()).toUri();
-        // return ResponseEntity.created(location).body(savedBook);
     }
 
-    // @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{productId}")
     public Product updateProduct(@PathVariable("productId") String productId, 
-                            @RequestBody @Valid ProductDTO prod) throws ServiceException { 
+                                 @RequestBody @Valid ProductDTO prod) throws ServiceException {
         return productService.updateProduct(productId, prod); 
     }
 
-    // @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{productId}")
     public void deleteProduct(@PathVariable("productId") String productId) throws ServiceException {
         productService.deleteProduct(productId);
@@ -81,6 +67,15 @@ public class ProductController {
     public List<Product> getAllProducts() throws ServiceException {
         return productService.getAllProducts();
     }
+
+    // @PostMapping
+    // public Product addProduct2(@RequestBody @Valid ProductDTO prod, BindingResult result) throws ServiceException {
+    //     if(result.hasErrors())
+    //         throw new ValidationException(createErrorString(result));
+    //     return productService.addProduct(prod);
+    //     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedBook.getId()).toUri();
+    //     return ResponseEntity.created(location).body(savedBook);
+    // }
     
 }
 

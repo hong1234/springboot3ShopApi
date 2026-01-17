@@ -2,7 +2,8 @@ INSERT INTO
     categories (id, title)
 VALUES
     ('a1b9b31d-e73c-4112-af7c-b68530f38222', 'JavaScript'), 
-    ('819e1fbf-8b7e-4f6d-811f-693534916a8b', 'Java');
+    ('819e1fbf-8b7e-4f6d-811f-693534916a8b', 'Java'),
+    ('9d927bff-8d5b-4929-8c26-a9be00173adc', 'Toys');
 
 INSERT INTO
     products (id, title, supplier, image, unit_price, category_id)
