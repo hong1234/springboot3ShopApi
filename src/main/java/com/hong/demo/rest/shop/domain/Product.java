@@ -3,9 +3,9 @@ package com.hong.demo.rest.shop.domain;
 import java.math.BigDecimal;
 
 public record Product(
-    String id, 
+    String productId, 
     String title, 
-    String autor, 
+    String supplier, 
     String image,
     BigDecimal unitPrice
 ) {}

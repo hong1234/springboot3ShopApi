@@ -21,7 +21,7 @@ public class CategoryEntity {
     private String title; 
 
     // @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY)
-    private List<ProductEntity> products;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY) 
+    // private List<ProductEntity> products;
 
 }

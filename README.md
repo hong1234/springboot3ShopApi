@@ -78,3 +78,15 @@ PUT http://localhost:8080/api/v1/carts/12c77898-0281-408d-88d6-b10c2bcfe623/item
 GET http://localhost:8080/api/v1/carts/12c77898-0281-408d-88d6-b10c2bcfe623/checkout
 
 GET http://localhost:8080/api/v1/carts/e80d3c15-4b7b-4fed-9e24-3d219d882e50
+
+## add product
+
+POST http://localhost:8080/api/v1/products
+
+{
+"title": "test",
+"supplier": "test",
+"image": "test",
+"unitPrice": 19.99,
+"categoryId": "a1b9b31d-e73c-4112-af7c-b68530f38222"
+}

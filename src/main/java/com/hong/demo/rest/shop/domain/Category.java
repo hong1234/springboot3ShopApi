@@ -4,6 +4,6 @@ import java.util.List;
 
 public record Category(
     String categoryId, 
-    String title, 
-    List<Product> products
+    String title //, 
+    // List<Product> products
 ) {} 

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.*;
 public record CartItem(
     // String itemId,
     @NotBlank(message = "productId is required.") String productId,
-    String productTitle,
+    String title,
     BigDecimal unitPrice,
     @NotNull(message = "quantity is required.") Integer qty
 ) {}

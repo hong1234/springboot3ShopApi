@@ -27,14 +27,19 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    // @GetMapping("/{customerId}/test")
-    // public Cart getTestCartById(@PathVariable String customerId) throws ServiceException {
-    //     return cartService.getCartItemsByCustomerIdId(customerId); 
-    // }
-
-    @GetMapping("/{cartId}/info")
-    public Cart getCartById(@PathVariable String cartId) throws ServiceException {
-        return cartService.getCartByCartId(cartId); 
+    @PutMapping("/{customerId}/items")
+    public ResponseEntity<Cart> AddOrRemoveItem (
+        @PathVariable String customerId, 
+        @Valid @RequestBody CartItemDTO item
+    ) throws ServiceException {
+        String action = item.getModus();
+        if(action.equals("add")){
+            Cart newItem = cartService.addItem(customerId, item);
+            return ResponseEntity.ok(newItem);
+        } else {
+            Cart newItem = cartService.removeItem(customerId, item);
+            return ResponseEntity.ok(newItem);
+        }
     }
 
     @GetMapping("/{customerId}")
@@ -47,6 +52,16 @@ public class CartController {
         return cartService.cartCheckOut(customerId); 
     }
 
+    // @GetMapping("/{customerId}/test")
+    // public Cart getTestCartById(@PathVariable String customerId) throws ServiceException {
+    //     return cartService.getCartItemsByCustomerIdId(customerId); 
+    // }
+
+    // @GetMapping("/{cartId}/info")
+    // public Cart getCartById(@PathVariable String cartId) throws ServiceException {
+    //     return cartService.getCartByCartId(cartId); 
+    // }
+
     // @PutMapping("/{customerId}/items")
     // public ResponseEntity<List<Item>> addOrReplaceItemsByCustomerId(String customerId, @Valid Item item) {
     //     return ok(service.addOrReplaceItemsByCustomerId(customerId, item));
@@ -58,26 +73,6 @@ public class CartController {
     //     // return ResponseEntity.ok(item.modus());
     //     return ResponseEntity.ok(item);
     // }
-
-    @PutMapping("/{customerId}/items")
-    public ResponseEntity<Cart> AddOrRemoveItem (
-        @PathVariable String customerId, 
-        @Valid @RequestBody CartItemDTO item
-    ) throws ServiceException {
-        String action = item.getModus();
-
-        if(action.equals("add")){
-            Cart newItem = cartService.addItem(customerId, item);
-            return ResponseEntity.ok(newItem);
-        } 
-
-        if(action.equals("remove")){
-            Cart newItem = cartService.removeItem(customerId, item);
-            return ResponseEntity.ok(newItem);
-        }
-
-        return ResponseEntity.ok(new Cart("test", new ArrayList<>())); // test
-    }
 
     // @PutMapping("/{id}")
     // public User updateUser(@PathVariable int id, @Valid @RequestBody User updatedUser) {

@@ -18,10 +18,15 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{categoryId}")
-    public Category getCategory(@PathVariable String categoryId) throws ServiceException {
-        return categoryService.getCategory(categoryId);
+    @GetMapping
+    public List<Category> allCategories() throws ServiceException {
+        return categoryService.allCategories();
     }
+
+    // @GetMapping("/{categoryId}")
+    // public Category getCategory(@PathVariable String categoryId) throws ServiceException {
+    //     return categoryService.getCategory(categoryId);
+    // }
 
 }
 

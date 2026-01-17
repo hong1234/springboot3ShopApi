@@ -19,7 +19,9 @@ import java.math.BigDecimal;
 // import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "products")
@@ -30,7 +32,7 @@ public class ProductEntity {
     private UUID id;
 
     private String title;
-    private String autor;
+    private String supplier;
     private String image;
 
     private BigDecimal unitPrice;
