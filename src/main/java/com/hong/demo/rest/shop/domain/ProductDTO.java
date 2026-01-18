@@ -10,8 +10,14 @@ public class ProductDTO {
     @NotBlank(message = "title is required.")
     private String title; 
 
+    @NotBlank(message = "description is required.")
+    private String description;
+
     @NotBlank(message = "supplier is required.")
     private String supplier;
+
+    @NotBlank(message = "searchkeys is required.")
+    private String searchkeys;
 
     @NotBlank(message = "image is required.")
     private String image;

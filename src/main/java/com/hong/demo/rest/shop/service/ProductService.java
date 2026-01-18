@@ -21,7 +21,7 @@ import com.hong.demo.rest.shop.domain.*;
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository productRepository; 
     private final CategoryRepository categoryRepository;
 
     public Product addProduct(ProductDTO prod) throws ServiceException {
@@ -29,7 +29,9 @@ public class ProductService {
 
         ProductEntity newProd = new ProductEntity();
         newProd.setTitle(prod.getTitle());
+        newProd.setDescription(prod.getDescription());
         newProd.setSupplier(prod.getSupplier());
+        newProd.setSearchkeys(prod.getSearchkeys());
         newProd.setImage(prod.getImage());
         newProd.setUnitPrice(prod.getUnitPrice());
         newProd.setCategory(cat);
@@ -41,7 +43,9 @@ public class ProductService {
     public Product updateProduct(String productId, ProductDTO prod){
         ProductEntity curProd = getProductById(productId);
         curProd.setTitle(prod.getTitle());
+        curProd.setDescription(prod.getDescription());
         curProd.setSupplier(prod.getSupplier());
+        curProd.setSearchkeys(prod.getSearchkeys());
         curProd.setImage(prod.getImage());
         curProd.setUnitPrice(prod.getUnitPrice());
         curProd = productRepository.save(curProd);
@@ -53,7 +57,7 @@ public class ProductService {
     }
 
     public List<Product> searchByTitle(String title) throws ServiceException {
-        return productRepository.searchByTitle(title)
+        return productRepository.searchByTitle(title.toLowerCase())
             .stream().map(prod -> productRecord(prod)).toList();
     }
 
@@ -86,7 +90,9 @@ public class ProductService {
         return new Product(
             prod.getId().toString(), 
             prod.getTitle(),
+            prod.getDescription(),
             prod.getSupplier(),
+            prod.getSearchkeys(),
             prod.getImage(),
             prod.getUnitPrice()
         );

@@ -13,7 +13,9 @@ CREATE TABLE categories (
 CREATE TABLE products (
     id uuid NOT NULL DEFAULT random_uuid(),
     title VARCHAR(100) NOT NULL, 
+    description VARCHAR(256) NOT NULL,
     supplier VARCHAR(100) NOT NULL,
+    searchkeys VARCHAR(256) NOT NULL,
     image VARCHAR(200) NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
     category_id uuid NOT NULL,

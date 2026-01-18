@@ -32,7 +32,9 @@ public class ProductEntity {
     private UUID id;
 
     private String title;
+    private String description;
     private String supplier;
+    private String searchkeys;
     private String image;
 
     private BigDecimal unitPrice;
