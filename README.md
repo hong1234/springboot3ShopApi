@@ -1,6 +1,6 @@
 # spring boot 3 SHOP version 2 using UUID
 
-## run
+## run API server
 
 cd C:\HONG\JAVA2026\Sym3SHOP\HONG
 
@@ -9,6 +9,26 @@ git clone https://github.com/hong1234/springboot3ShopApi.git
 cd springboot3ShopApi
 
 ./mvnw spring-boot:run
+
+## test using UI app sb3ShopReactUI
+
+# install
+
+git clone https://github.com/hong1234/sb3ShopReactUI.git
+
+// cd C:\HONG\2026-IT-WORK\JS2026\springboot3ShopUI
+
+cd sb3ShopReactUI
+
+npm install
+
+# run dev UI-server
+
+npm start
+
+# url in browser
+
+http://localhost:3000/
 
 ## test using Postman client
 

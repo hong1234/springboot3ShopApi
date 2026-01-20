@@ -145,6 +145,7 @@ public class CartService {
         CartEntity cart = cartRepository.findByCustomerId(UUID.fromString(customerId)).orElse(new CartEntity());
 
          if (cart.getId()==null) {
+            // CustomerEntity customer = customerRepository.findById(UUID.fromString(customerId)).orElse(null);
             cart.setCustomer(customerRepository.findById(UUID.fromString(customerId)).get());
             // cart.setId(UUID.randomUUID());
             cart = cartRepository.save(cart);
@@ -173,12 +174,13 @@ public class CartService {
         );
     }
 
-    public Order orderRecord(OrderEntity order) {
+    public Order orderRecord(OrderEntity order) { 
         return new Order(
             order.getId().toString(),
             order.getCreatedAt(),
             order.getShipmentPrice(),
             order.getTotalPrice(), 
+            order.getCustomer().getAddress(),
             order.getItems().stream().map(
                 item -> new OrderItem(
                     item.getProduct().getId().toString(),

@@ -22,4 +22,9 @@ public class OrderController {
     public Order getOrderById(@PathVariable String orderId) throws ServiceException {
         return orderService.getOrderById(orderId); 
     }
+
+    @GetMapping("/customer/{customerId}")
+    public List<Order> getOrdersByCustomerId(@PathVariable String customerId) throws ServiceException {
+        return orderService.getOrdersByCustomerId(customerId); 
+    }
 }

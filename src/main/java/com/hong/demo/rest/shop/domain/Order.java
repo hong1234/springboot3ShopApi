@@ -12,6 +12,6 @@ public record Order(
     BigDecimal shipmentPrice,
     BigDecimal totalPrice,
     // String customerId,
-    // String customerAddress,
+    String customerAddress,
     List<OrderItem> items
 ) {}

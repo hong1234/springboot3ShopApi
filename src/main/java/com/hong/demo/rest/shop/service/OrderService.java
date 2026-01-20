@@ -39,11 +39,21 @@ public class OrderService {
 
     public Order getOrderById(String orderId) throws ServiceException {
         OrderEntity order = orderRepository.findById(UUID.fromString(orderId)).get();
+        return orderRecord(order);
+    }
+
+    public List<Order> getOrdersByCustomerId(String customerId) {
+        return orderRepository.findByCustomerId(UUID.fromString(customerId))
+            .stream().map(order -> orderRecord(order)).toList();
+    }
+
+    public Order orderRecord(OrderEntity order) { 
         return new Order(
             order.getId().toString(),
             order.getCreatedAt(),
             order.getShipmentPrice(),
-            order.getTotalPrice(),
+            order.getTotalPrice(), 
+            order.getCustomer().getAddress(),
             order.getItems().stream().map(
                 item -> new OrderItem(
                     item.getProduct().getId().toString(),
