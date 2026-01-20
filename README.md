@@ -1,6 +1,6 @@
-# spring boot 3 SHOP version 2 using UUID
+## spring boot 3 SHOP version 2
 
-## run API server
+# run API server
 
 cd C:\HONG\JAVA2026\Sym3SHOP\HONG
 
@@ -10,9 +10,9 @@ cd springboot3ShopApi
 
 ./mvnw spring-boot:run
 
-## test using UI app sb3ShopReactUI
+# test using UI app sb3ShopReactUI
 
-# install
+## install
 
 git clone https://github.com/hong1234/sb3ShopReactUI.git
 
@@ -22,15 +22,15 @@ cd sb3ShopReactUI
 
 npm install
 
-# run dev UI-server
+## run dev UI-server
 
 npm start
 
-# url in browser
+## url in browser
 
 http://localhost:3000/
 
-## test using Postman client
+# test using Postman client
 
 with basic authen : user=admin ; pw=admin
 
