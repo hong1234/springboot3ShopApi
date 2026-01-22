@@ -10,23 +10,33 @@ cd springboot3ShopApi
 
 ./mvnw spring-boot:run
 
-# test using UI app sb3ShopReactUI
+# test using UI-App sb3ShopUI-ReactTanStack
 
-## install
+git clone https://github.com/hong1234/sb3ShopUI-ReactTanStack.git
 
-git clone https://github.com/hong1234/sb3ShopReactUI.git
-
-// cd C:\HONG\2026-IT-WORK\JS2026\springboot3ShopUI
-
-cd sb3ShopReactUI
+cd sb3ShopUI-ReactTanStack
 
 npm install
 
-## run dev UI-server
+npm run dev
+
+// browser
+
+http://localhost:5173/
+
+## alternativ
+
+// git clone https://github.com/hong1234/sb3ShopReactUI.git
+
+// cd sb3ShopReactUI
+
+// cd C:\HONG\2026-IT-WORK\JS2026\springboot3ShopUI
+
+npm install
 
 npm start
 
-## url in browser
+// url in browser
 
 http://localhost:3000/
 
