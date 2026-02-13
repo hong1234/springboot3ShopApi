@@ -35,9 +35,9 @@ public class SecurityConfiguration {
         http.csrf((csrf) -> csrf.disable());
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests((authz) -> authz
-                .anyRequest().authenticated()
-            )
-            .httpBasic(Customizer.withDefaults());
+            .anyRequest().authenticated()
+        )
+        .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 

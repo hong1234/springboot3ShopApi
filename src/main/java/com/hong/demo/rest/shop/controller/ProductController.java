@@ -32,6 +32,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody @Valid ProductDTO prod) throws ServiceException {
         return productService.addProduct(prod);
     }

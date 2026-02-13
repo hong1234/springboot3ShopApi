@@ -16,16 +16,21 @@ import java.math.BigDecimal;
 // import jakarta.persistence.Id;
 // import jakarta.persistence.OneToMany;
 // import jakarta.persistence.ManyToOne; 
-// import jakarta.persistence.Table;
+// import jakarta.persistence.Table; 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "products")
-public class ProductEntity {
+public class ProductEntity { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

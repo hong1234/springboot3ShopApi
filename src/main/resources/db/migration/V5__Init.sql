@@ -44,8 +44,7 @@ CREATE TABLE orders (
     total_price DECIMAL(10, 2) NOT NULL,
     user_id uuid NOT NULL,
     PRIMARY KEY(id),
-    -- CONSTRAINT fk_customer 
-    FOREIGN KEY (user_id) REFERENCES customers(id)
+    CONSTRAINT fk_customer_order FOREIGN KEY (user_id) REFERENCES customers(id)
 );
 
 CREATE TABLE orderitems (
@@ -56,8 +55,7 @@ CREATE TABLE orderitems (
     product_id uuid NOT NULL,
     order_id uuid NOT NULL,
     PRIMARY KEY(id),
-    -- CONSTRAINT fk_product  
-    FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT fk_product_order FOREIGN KEY (product_id) REFERENCES products(id),
     CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(id)
 );
 
