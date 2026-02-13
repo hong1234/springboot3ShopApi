@@ -10,6 +10,10 @@ cd springboot3ShopApi
 
 ./mvnw spring-boot:run
 
+# run test
+
+./mvnw test
+
 # test using UI-App sb3ShopUI-ReactTanStack
 
 git clone https://github.com/hong1234/sb3ShopUI-ReactTanStack.git
