@@ -104,7 +104,7 @@ public class CartService {
 
         OrderEntity order = new OrderEntity();
         order.setCreatedAt(LocalDateTime.now());
-        order.setShipmentPrice(new BigDecimal("5.50"));
+        order.setShipmentPrice(new BigDecimal("5.99"));
         order.setCustomer(cart.getCustomer());
 
         BigDecimal total = BigDecimal.ZERO;
@@ -124,7 +124,7 @@ public class CartService {
         }
 
         order.setItemsPrice(total);
-        total = (BigDecimal.valueOf(Double.valueOf("5.50"))).add(total);
+        total = (BigDecimal.valueOf(Double.valueOf("5.99"))).add(total);
         order.setTotalPrice(total);
 
         order = orderRepository.save(order);

@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when; 
+import static org.mockito.Mockito.when;  
 
 @ExtendWith(MockitoExtension.class)
 public class CartServiceTest {
@@ -43,6 +43,7 @@ public class CartServiceTest {
 
     private CustomerEntity customer;
     private ProductEntity product;
+    private ProductEntity newProduct;
     private CartEntity cart;
     
     @BeforeEach
@@ -63,6 +64,17 @@ public class CartServiceTest {
         .supplier("Hong Le")
         .searchkeys("javascript news")
         .image("/images/Antifragile.jpg")
+        .unitPrice(BigDecimal.valueOf(Double.valueOf("19.99")))
+        .category(category)
+        .build();
+
+        newProduct = ProductEntity.builder()
+        .id(UUID.fromString("892422cd-0835-479e-84de-9265d3f2dc6a"))
+        .title("JavaScript for Beginner")
+        .description("Js for New commer")
+        .supplier("Marx Plank")
+        .searchkeys("javascript for beginner")
+        .image("/images/Antifragile.jpg")
         .unitPrice(BigDecimal.valueOf(Double.valueOf("29.99")))
         .category(category)
         .build();
@@ -72,47 +84,102 @@ public class CartServiceTest {
         cart.setCustomer(customer);
         // cart.setItems();
 
+        // item#1
         CartItemEntity item = CartItemEntity.builder().id(UUID.fromString("b9f05831-6373-4303-b178-00ba325ca301"))
         .product(product).cart(cart).qty(1).unitPrice(new BigDecimal("29.99")).build();
-
-        cart.addItem(item);
-        cart.addItem(item);
+        // add item#1 to cart
+        cart.addItem(item); 
     }
 
     @Test
-    void addOneCartItem() {
+    void addOrRemoveCartItem() {
         when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
-        // when(productRepository.findById(UUID.fromString("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe"))).thenReturn(Optional.of(product));
+        when(productRepository.findById(UUID.fromString("892422cd-0835-479e-84de-9265d3f2dc6a"))).thenReturn(Optional.of(newProduct));
         when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
 
-        CartItemDTO dto = new CartItemDTO();
-        dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
-        dto.setModus("add");
-
         try {
+            CartItemDTO dto = new CartItemDTO();
+
+            // add (new) item#2
+            dto.setModus("add");
+            dto.setProductId("892422cd-0835-479e-84de-9265d3f2dc6a");
             Cart cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
-            assertEquals(3, cartNow.items().get(0).qty(), "qty should match");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+            // CartItem item = cartNow.items().get(1);
+            assertEquals("JavaScript for Beginner", cartNow.items().get(1).title(), "title should match");
+            assertEquals(1, cartNow.items().get(1).qty(), "qty should match");
 
-    @Test
-    void removeOneCartItem() {
-        when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
-        when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
+            // item#1 plus
+            dto.setModus("add");
+            dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
+            cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+            assertEquals("JavaScript today", cartNow.items().get(0).title(), "title should match");
+            assertEquals(2, cartNow.items().get(0).qty(), "qty should match");
 
-        CartItemDTO dto = new CartItemDTO();
-        dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
-        dto.setModus("remove");
-
-        try {
-            Cart cartNow = cartService.removeItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+            // item#1 minus
+            dto.setModus("remove");
+            dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
+            cartNow = cartService.removeItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+            assertEquals("JavaScript today", cartNow.items().get(0).title(), "title should match");
             assertEquals(1, cartNow.items().get(0).qty(), "qty should match");
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
+
+    // @Test
+    // void addNewCartItem() {
+    //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
+    //     when(productRepository.findById(UUID.fromString("892422cd-0835-479e-84de-9265d3f2dc6a"))).thenReturn(Optional.of(newProduct));
+    //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
+
+    //     CartItemDTO dto = new CartItemDTO();
+    //     dto.setProductId("892422cd-0835-479e-84de-9265d3f2dc6a");
+    //     dto.setModus("add");
+
+    //     try {
+    //         Cart cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+    //         CartItem item = cartNow.items().get(1);
+    //         assertEquals("JavaScript for Beginner", item.title(), "title should match");
+    //         assertEquals(1, item.qty(), "qty should match");
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
+
+    // @Test
+    // void addOneCartItem() {
+    //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
+    //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
+
+    //     CartItemDTO dto = new CartItemDTO();
+    //     dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
+    //     dto.setModus("add");
+
+    //     try {
+    //         Cart cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+    //         assertEquals(2, cartNow.items().get(0).qty(), "qty should match");
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
+
+    // @Test
+    // void removeOneCartItem() {
+    //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
+    //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
+
+    //     CartItemDTO dto = new CartItemDTO();
+    //     dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
+    //     dto.setModus("remove");
+
+    //     try {
+    //         Cart cartNow = cartService.removeItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
+    //         assertEquals(1, cartNow.items().get(0).qty(), "qty should match");
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+
+    // }
 
 }

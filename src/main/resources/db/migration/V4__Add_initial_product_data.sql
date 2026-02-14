@@ -1,14 +1,27 @@
 INSERT INTO
-    categories (id, title)
+    customers (id, email, username, password, address, phone)
 VALUES
-    ('a1b9b31d-e73c-4112-af7c-b68530f38222', 'JavaScript'), 
-    ('819e1fbf-8b7e-4f6d-811f-693534916a8b', 'Java'),
-    ('9d927bff-8d5b-4929-8c26-a9be00173adc', 'Toys');
+    ('3395a42e-2d88-40de-b95f-e00e1502085b', 'hong@gmail.com', 'hong', 'hong1234', 'address1', '123'),
+    ('3395a43e-2d88-40de-b95f-e00e1502085b', 'tommy@gmail.com', 'tommy', 'tommy1234', 'address2', '321'),
+    ('837ab141-399e-4c1f-9abc-bace40296bac', 'hanh@gmx.de', 'hanh', 'hanh1234', 'address3', '231'),
+    ('12c77898-0281-408d-88d6-b10c2bcfe623', 'mama@gmx.de', 'mama', 'mama1234', 'address4', '1234'),
+    ('e80d3c15-4b7b-4fed-9e24-3d219d882e50', 'papa@gmx.de', 'Marx', 'marx1234', 'Marx MuterStr.5', '2341');
+
 
 INSERT INTO
-    products (id, title, description, supplier, searchkeys, image, unit_price, category_id)
+    carts (id, created_at, user_id)
 VALUES
-    ('510a0d7e-8e83-4193-b483-e27e09ddc34d', 'JavaScript for Gurus', 'book for Gurus', 'Hong Le', 'javascript for gurus', '/images/Antifragile.jpg', 19.99, 'a1b9b31d-e73c-4112-af7c-b68530f38222'),
-    ('03fef6ac-1896-4ce8-bd69-b798f85c6e0b', 'Fundamentals of Java', 'book for Beginner', 'Tommy Le', 'fundamentals of java', '/images/Sapiens.jpeg', 39.99, '819e1fbf-8b7e-4f6d-811f-693534916a8b'),
-    ('d3588630-ad8e-49df-bbd7-3167f7efb246', 'Spring in Action', 'book for Java Dev', 'Maxell Dam', 'spring in action', '/images/Hackers.jpg', 49.99, '819e1fbf-8b7e-4f6d-811f-693534916a8b'),
-    ('892422cd-0835-479e-84de-9265d3f2dc6a', 'JavaScript for Beginner', 'Js for New commer', 'Marx Plank', 'javascript for beginner', '/images/ZeroToOne.jpg', 29.99, 'a1b9b31d-e73c-4112-af7c-b68530f38222');
+    ('6d62d909-f957-430e-8689-b5129c0bb75e', '2025-12-31 10:00:56', '3395a43e-2d88-40de-b95f-e00e1502085b'),
+    ('a0a4f044-b040-410d-8ead-4de0446aec7e', '2025-12-31 10:01:35', '3395a42e-2d88-40de-b95f-e00e1502085b'),
+    ('808a2de1-1aaa-4c25-a9b9-6612e8f29a38', '2026-01-11 10:01:35', '837ab141-399e-4c1f-9abc-bace40296bac'),
+    ('48bf7ba3-2cfa-4105-b092-118a4d9075d8', '2026-01-15 11:01:35', '12c77898-0281-408d-88d6-b10c2bcfe623');
+
+
+INSERT INTO
+    cartitems (id, qty, unit_price, product_id, cart_id)
+VALUES
+    ('ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe', 2, 19.99, '510a0d7e-8e83-4193-b483-e27e09ddc34d', '6d62d909-f957-430e-8689-b5129c0bb75e'),
+    ('b9f05831-6373-4303-b178-00ba325ca301', 1, 39.99, '03fef6ac-1896-4ce8-bd69-b798f85c6e0b', 'a0a4f044-b040-410d-8ead-4de0446aec7e'),
+    ('092b9522-e424-497d-ab06-4637ad824592', 1, 49.99, 'd3588630-ad8e-49df-bbd7-3167f7efb246', 'a0a4f044-b040-410d-8ead-4de0446aec7e'),
+    ('be4a655a-a61d-441e-9b71-455542824d5f', 2, 19.99, '510a0d7e-8e83-4193-b483-e27e09ddc34d', '808a2de1-1aaa-4c25-a9b9-6612e8f29a38'),
+    ('39a10f57-5e91-4625-9bc1-51afbbbff40c', 1, 49.99, 'd3588630-ad8e-49df-bbd7-3167f7efb246', '808a2de1-1aaa-4c25-a9b9-6612e8f29a38');
