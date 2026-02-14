@@ -9,9 +9,13 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*; 
 
+import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
+// @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity

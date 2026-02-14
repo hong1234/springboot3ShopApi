@@ -85,13 +85,13 @@ public class ProductControllerTest {
         .build();
 
         ProductEntity product = ProductEntity.builder()
-        .id(UUID.fromString("510a0d7e-8e83-4193-b483-e27e09ddc34d"))
-        .title("JavaScript for Gurus")
-        .description("book for Gurus")
+        .id(UUID.fromString("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe"))
+        .title("JavaScript today")
+        .description("news in JS")
         .supplier("Hong Le")
-        .searchkeys("javascript for gurus")
+        .searchkeys("javascript news")
         .image("/images/Antifragile.jpg")
-        .unitPrice(BigDecimal.valueOf(Double.valueOf("19.99")))
+        .unitPrice(BigDecimal.valueOf(Double.valueOf("29.99")))
         .category(category)
         .build();
 
@@ -107,19 +107,28 @@ public class ProductControllerTest {
     }
 
     @Test
-    // @WithMockUser(username = "admin", roles = {"ADMIN"})
-    // @WithMockUser 
-    void testGetProduct() throws Exception {
-        when(productService.getProduct("510a0d7e-8e83-4193-b483-e27e09ddc34d")).thenReturn(prod);
+    // @WithMockUser
+    void testCreateProduct() throws Exception {
+        when(productService.addProduct(any(ProductDTO.class))).thenReturn(prod);
+
         mockMvc
-        .perform(get("/api/v1/products/510a0d7e-8e83-4193-b483-e27e09ddc34d"))
+        .perform(post("/api/v1/products")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content("""
+            {
+                "title": "JavaScript today",
+                "description": "news in JS",
+                "supplier": "Hong Le",
+                "searchkeys": "javascript news",
+                "image": "/images/Antifragile.jpg",
+                "unitPrice": "29.99",
+                "categoryId": "a1b9b31d-e73c-4112-af7c-b68530f38222"
+            }
+        """))
         .andDo(print())
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        // .andExpect(content().string(containsString("JavaScript for Gurus")))
-        // .andExpect(jsonPath("$.title").value(prod.title()))
-        .andExpect(jsonPath("$.title").value("JavaScript for Gurus"))
-        .andExpect(jsonPath("$.description").value("book for Gurus"))
+        .andExpect(jsonPath("$.title").value("JavaScript today"))
         ;
     }
 

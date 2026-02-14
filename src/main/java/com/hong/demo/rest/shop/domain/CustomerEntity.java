@@ -4,7 +4,14 @@ import java.util.UUID;
 
 import jakarta.persistence.*; 
 import lombok.Data;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "customers")

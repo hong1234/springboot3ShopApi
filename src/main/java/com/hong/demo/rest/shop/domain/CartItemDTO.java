@@ -5,7 +5,7 @@ package com.hong.demo.rest.shop.domain;
 import java.time.LocalDateTime;
 
 import lombok.Data;
-// import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
 
 // import jakarta.validation.constraints.NotNull;
 // import jakarta.validation.constraints.NotBlank;
@@ -17,6 +17,7 @@ import jakarta.validation.constraints.*;
 // import com.hong.demo.validation.StatusValidation;
 // import com.fasterxml.jackson.annotation.JsonFormat;
 
+@NoArgsConstructor
 @Data
 public class CartItemDTO {
     // @Email(message = "Please provide a valid email address.")
